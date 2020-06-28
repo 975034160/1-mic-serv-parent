@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: mic-zuul
+  redis:
+    host: 192.168.0.104
+    port: 6379
+eureka:
+  client:
+    #defaultZone不指定的情况下 默认会向http://127.0.0.1:8761/eureka注册，如果没有会抛出错误信息 写错的情况写也会抛出
+    service-url:
+      defaultZone:  http://127.0.0.1:8765/eureka   #可以指定多个
+
+    healthcheck:
+      enabled: true
+  instance:
+    lease-renewal-interval-in-seconds: 10  #注册更新时间 默认20秒
+    lease-expiration-duration-in-seconds: 30  #注册持续时间 默认90秒
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address} :${server.port}  #springboot2.0之后 使用${spring.cloud.client.ip-address}
+    hostname: loaclhost
+zuul:
+  ignored-services: "*"
+#  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+#  sensitive-headers: Access-Control-Allow-Origin
+
+
+zuul.routes.user.path: /user/**
+zuul.routes.user.service-id: mic-user
+zuul.routes.user.stripPrefix: false
