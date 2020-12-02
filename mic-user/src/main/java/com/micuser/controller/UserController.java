@@ -55,23 +55,23 @@ public class UserController {
 		Map data = new HashMap<>();
 		//验证失败时返回信息
 		if(user==null) {
-			responseData.setStatus(-1);
-			responseData.setMessage("登录失败,用户不存在");
+			responseData.setCode(-1);
+			responseData.setMsg("登录失败,用户不存在");
 			return responseData;
 		}
 		if(!user.getPassword().equals(password)) {
-			responseData.setStatus(-1);
-			responseData.setMessage("登录失败,密码错误");
+			responseData.setCode(-1);
+			responseData.setMsg("登录失败,密码错误");
 			return responseData;
 		}
 		//验证通过后  token 写到cookie中  返回到数据中
-//		String token ="";
+//		String token ="12346";
 		String token = redisTokenManager.getToken(user);
 		Cookie cookie = new Cookie("token", token);
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		
-		responseData.setStatus(0);
+		responseData.setCode(0);
 		data.put("token", token);
 		responseData.setData(data);
 		return responseData;

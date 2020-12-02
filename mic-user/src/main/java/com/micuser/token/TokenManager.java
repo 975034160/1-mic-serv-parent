@@ -1,8 +1,5 @@
 package com.micuser.token;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.micuser.entity.User;
 
 

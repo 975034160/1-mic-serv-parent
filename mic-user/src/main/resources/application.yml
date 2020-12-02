@@ -19,7 +19,7 @@ spring:
 
   thymeleaf:
     cache: false
-    mode: LEGACYHTML5  redis:    host: 192.168.0.104
+    mode: LEGACYHTML5  redis:    host: 127.0.0.1
     port: 6379
 eureka:
   client:
