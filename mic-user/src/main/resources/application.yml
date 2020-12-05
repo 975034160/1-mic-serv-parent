@@ -5,37 +5,7 @@ server:
 spring:
   application:
     name: mic-user
-
-    
-#数据库配置
-  datasource:
-    url: jdbc:mysql://localhost:13306/springboot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456
-  mvc:
-    view:
-      prefix: classpath:/templates/
-      suffix: .html
-
-  thymeleaf:
-    cache: false
-    mode: LEGACYHTML5  redis:    host: 127.0.0.1
-    port: 6379
-eureka:
-  client:
-    service-url:
-     defaultZone: http://127.0.0.1:8765/eureka
-    healthcheck:
-     enabled: true
-  instance:
-    lease-renewal-interval-in-seconds: 10  #注册更新时间 默认20秒
-    lease-expiration-duration-in-seconds: 30  #注册持续时间 默认90秒
-    prefer-ip-address: true
-    instance-id: ${spring.cloud.client.ip-address} :${server.port}       #springboot2.0之后 使用${spring.cloud.client.ip-address}
-    hostname: loaclhost
-
-
-
+  profiles:    active: test
 
 #debug: true
 
@@ -52,4 +22,3 @@ logging:
   level:
     com:
       mybatis: debug
-  

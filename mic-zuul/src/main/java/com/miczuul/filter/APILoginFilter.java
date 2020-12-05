@@ -50,6 +50,8 @@ public class APILoginFilter extends ZuulFilter {
 		if(StringUtils.isBlank(token1)) {
 			token1 = servletRequest.getParameter("token");
 		}
+		//从cookie中获取
+		
 		//验证token是否存在，如果不存在就返回错误信息
 		if(StringUtils.isBlank(token1)) {
 			//停止访问，并返回出错的消息
@@ -61,8 +63,8 @@ public class APILoginFilter extends ZuulFilter {
             requestContext.setResponseBody("未登录！");		
 		} else {
 			//验证请求中的token是否在redis中存在
-			String token = redisUtil.get(token1);
-			if(StringUtils.isBlank(token)) {
+			String username = redisUtil.get(token1);
+			if(StringUtils.isBlank(username)) {
 				//停止访问，并返回出错的消息
 				requestContext.setSendZuulResponse(false);
 				//防止中文乱码

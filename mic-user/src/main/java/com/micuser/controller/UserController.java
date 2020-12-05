@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.micuser.common.RedisUtil;
 import com.micuser.common.ResponseData;
+import com.micuser.common.TokenUtil;
 import com.micuser.entity.User;
 import com.micuser.service.UserService;
 import com.micuser.token.RedisTokenManager;
@@ -36,16 +37,16 @@ public class UserController {
 	
 	
 	
-	@ResponseBody
-	@RequestMapping("/findAllUser")
-	public List<User> findAllUser(){
-		List<User> list = userService.findAllUser();
-		if (list.size()==0) {
-			return null;
-		}
-		System.out.println(list.get(0));
-		return list;
-	}
+//	@ResponseBody
+//	@RequestMapping("/findAllUser")
+//	public List<User> findAllUser(){
+//		List<User> list = userService.findAllUser();
+//		if (list.size()==0) {
+//			return null;
+//		}
+//		System.out.println(list.get(0));
+//		return list;
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
@@ -77,6 +78,14 @@ public class UserController {
 		return responseData;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/logout",method = RequestMethod.POST)
+	public ResponseData logout(@RequestParam String token) {
+		ResponseData responseData= new ResponseData();
+		System.out.println("token:"+token);
+		redisTokenManager.loginOff(token);
+		System.out.println("用户退出登录！");
+		return responseData;
+	}
 	
 }

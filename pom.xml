@@ -16,6 +16,7 @@
   	<module>mic-eureka</module>
   	<module>mic-zuul</module>
   	<module>mic-user</module>
+  	<module>mic-ms-base</module>
   </modules>
   
   <properties>

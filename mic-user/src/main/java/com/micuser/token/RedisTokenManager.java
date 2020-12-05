@@ -34,7 +34,7 @@ public class RedisTokenManager implements TokenManager {
 		token = JWT.create().withAudience(user.getId()).withIssuedAt(start).withExpiresAt(end)
 				.sign(Algorithm.HMAC256(user.getPassword()));    	
         try {
-			redisUtil.setexObject(token,user,1000);
+			redisUtil.setexObject(token,user.getUsername(),1000);
 			System.out.println(redisUtil.getObject(token));
 		} catch (Exception e) {
 			e.printStackTrace();
