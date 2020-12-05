@@ -1,0 +1,7 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: mic-ms-base
